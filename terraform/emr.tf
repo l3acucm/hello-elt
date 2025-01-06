@@ -12,6 +12,7 @@ resource "aws_emr_cluster" "cluster" {
   name          = "emr-test-arn"
   release_label = "emr-7.6.0"
   applications  = ["Spark"]
+  log_uri = "s3://hello-data-terraform-backend/emr-logs/"
 
   ec2_attributes {
     subnet_id                         = aws_subnet.main.id
@@ -84,7 +85,7 @@ resource "aws_security_group" "allow_access" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["193.34.225.55/32"]
+    cidr_blocks = ["0.0.0.0/0"]
   }
 
   egress {
